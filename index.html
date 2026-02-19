@@ -3,16 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swag Check</title>
+    <title>Paulas Website</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
-    <h1>What's your swag level?</h1>
-    <div id="result">- %</div>
-    <button id="swagButton">Check my Swag!</button>
-</div>
+<section id="welcome" class="active">
+    <h1>Paulas Website</h1>
+    <button id="show-profile" class="btn">Zum Steckbrief</button>
+</section>
+
+<section id="profile" class="hidden">
+    <div class="profile-card">
+        <h2>Paula G.</h2>
+        <p>Herzlich Willkommen auf meiner Seite! Hier entsteht gerade mein persönlicher Steckbrief.</p>
+        <p><strong>Über mich:</strong> Ich interessiere mich für spannende Projekte und vernetze mich gerne.</p>
+    </div>
+
+    <div class="links-footer">
+        <a href="cv.pdf" target="_blank">CV</a>
+        <a href="https://linkedin.com/in/dein-name" target="_blank">LinkedIn</a>
+    </div>
+
+    <button id="go-back" class="back-link">← Zurück</button>
+</section>
 
 <script src="script.js"></script>
 </body>

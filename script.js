@@ -1,15 +1,24 @@
-document.getElementById('swagButton').addEventListener('click', function() {
-    // Zufallszahl zwischen 1 und 100 generieren
-    const swagLevel = Math.floor(Math.random() * 100) + 1;
+document.addEventListener('DOMContentLoaded', () => {
+    const welcomeSection = document.getElementById('welcome');
+    const profileSection = document.getElementById('profile');
+    const btnShowProfile = document.getElementById('show-profile');
+    const btnGoBack = document.getElementById('go-back');
 
-    // Das Ergebnis im HTML anzeigen
-    const resultElement = document.getElementById('result');
-    resultElement.textContent = swagLevel + "%";
+    // Button-Klick: Von Welcome zu Steckbrief
+    btnShowProfile.addEventListener('click', () => {
+        welcomeSection.classList.remove('active');
+        welcomeSection.classList.add('hidden');
 
-    // Kleiner Animationseffekt
-    resultElement.style.transform = "scale(1.2)";
-    setTimeout(() => {
-        resultElement.style.transform = "scale(1.0)";
-    }, 200);
+        profileSection.classList.remove('hidden');
+        profileSection.classList.add('active');
+    });
 
+    // Button-Klick: Zurück zur Startseite
+    btnGoBack.addEventListener('click', () => {
+        profileSection.classList.remove('active');
+        profileSection.classList.add('hidden');
+
+        welcomeSection.classList.remove('hidden');
+        welcomeSection.classList.add('active');
+    });
 });
