@@ -1,0 +1,16 @@
+body {
+    background-color: #f0f8ff; /* Ein helles Blau */
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+h1 {
+    color: #0070f3; /* Vercel Blau */
+    border: 2px solid #0070f3;
+    padding: 20px;
+    border-radius: 10px;
+}
