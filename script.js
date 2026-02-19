@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         profileSection.classList.add('active');
     });
 
+
     // Button-Klick: Zurück zur Startseite
     btnGoBack.addEventListener('click', () => {
         profileSection.classList.remove('active');
