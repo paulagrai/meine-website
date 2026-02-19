@@ -11,4 +11,5 @@ document.getElementById('swagButton').addEventListener('click', function() {
     setTimeout(() => {
         resultElement.style.transform = "scale(1.0)";
     }, 200);
+
 });
