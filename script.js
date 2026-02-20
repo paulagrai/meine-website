@@ -1,59 +1,20 @@
-const questions = [
-    { q: "Was ist Paulas Lieblingsessen?", a: ["Pizza", "Sushi", "Döner", "Salat"] },
-    { q: "Lieblingsjahreszeit?", a: ["Sommer", "Winter", "Herbst", "Frühling"] },
-    { q: "Paulas Lieblingsfarbe?", a: ["Pink", "Schwarz", "Blau", "Grün"] },
-    { q: "Was macht Paula am liebsten?", a: ["Coding", "Schlafen", "Netflix", "Reisen"] },
-    { q: "Wie viel Swag denkst du hast du?", a: ["Viel", "Extrem viel", "Unendlich", "Was ist Swag?"] }
-];
+// ... (Deine Fragen-Logik bleibt gleich wie oben)
 
-let currentQuestionIndex = 0;
-
-document.getElementById('start-quiz').addEventListener('click', () => {
-    showSection('quiz');
-    showQuestion();
-});
-
-function showQuestion() {
-    const question = questions[currentQuestionIndex];
-    document.getElementById('question-text').innerText = question.q;
-    const container = document.getElementById('answer-buttons');
-    container.innerHTML = '';
-
-    question.a.forEach(answer => {
-        const btn = document.createElement('button');
-        btn.innerText = answer;
-        btn.classList.add('answer-btn');
-        btn.onclick = nextQuestion;
-        container.appendChild(btn);
-    });
-}
-
-function nextQuestion() {
-    currentQuestionIndex++;
-    if (currentQuestionIndex < questions.length) {
-        showQuestion();
-    } else {
-        showResult();
-    }
-}
-
-function showResult() {
+function finish() {
     showSection('result');
-    // Random Swag Generator
-    const swag = Math.floor(Math.random() * 101);
-    document.getElementById('swag-value').innerText = swag + "%";
+    const val = Math.floor(Math.random() * 41) + 50;
+    document.getElementById('swag-value').innerText = val + "%";
+    document.getElementById('swag-comment').innerText = "Dein Swag ist okay, aber nicht perfekt.";
+}
 
-    let comment = swag > 70 ? "Stabil!" : "Da geht noch was...";
-    document.getElementById('swag-comment').innerText = comment;
+function pay(amount) {
+    const email = "paula.graichen@live.de";
+    const url = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=${email}&amount=${amount}.00&currency_code=EUR&item_name=Swag+Boost+Level+${amount}`;
+    window.location.href = url;
 }
 
 function showSection(id) {
-    document.querySelectorAll('section').forEach(s => s.classList.replace('active', 'hidden'));
-    document.getElementById(id).classList.replace('hidden', 'active');
+    document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
+    document.getElementById(id).classList.remove('hidden');
+    document.getElementById(id).classList.add('active');
 }
-
-// PayPal Weiterleitung
-document.getElementById('improve-btn').addEventListener('click', () => {
-    const paypalUrl = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=paula.graichen@live.de&amount=1.00&currency_code=EUR&item_name=Swag+Improvement";
-    window.open(paypalUrl, '_blank');
-});

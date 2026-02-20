@@ -23,12 +23,18 @@
 
 <section id="result" class="hidden">
     <div class="result-card">
-        <h2>Dein Swag Level:</h2>
+        <h2>DEIN SWAG LEVEL</h2>
         <div id="swag-value">0%</div>
         <p id="swag-comment"></p>
 
-        <button id="improve-btn" class="btn improve">Improve your Swag Level (1€)</button>
-        <button onclick="location.reload()" class="back-link">Nochmal versuchen</button>
+        <p class="improve-text">Wähle deinen Boost:</p>
+        <div class="pay-grid">
+            <button onclick="pay(1)" class="btn-pay">1€ <br><span>Small Boost</span></button>
+            <button onclick="pay(3)" class="btn-pay highlight">3€ <br><span>Medium Boost</span></button>
+            <button onclick="pay(5)" class="btn-pay">5€ <br><span>ULTRA BOOST</span></button>
+        </div>
+
+        <button onclick="location.reload()" class="btn-retry">Nochmal versuchen</button>
     </div>
 </section>
 
