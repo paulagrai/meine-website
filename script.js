@@ -1,20 +1,27 @@
-// ... (Fragen-Array bleibt gleich)
+const questions = [
+    { q: "Was ist Paulas Lieblingsessen?", a: ["Pizza", "Sushi", "Pasta", "Burger"] },
+    { q: "Lieblingsjahreszeit?", a: ["Sommer", "Winter", "Herbst", "Frühling"] },
+    { q: "Signature-Farbe?", a: ["Pink", "Schwarz", "Blau", "Grün"] },
+    { q: "Sonntags-Vibe?", a: ["Netflix", "Sport", "Coding", "Party"] },
+    { q: "Dein Swag-Level?", a: ["Hoch", "Sehr Hoch", "Maximum", "Keiner"] }
+];
 
 let currentIdx = 0;
 let clicks = 0;
 let timeLeft = 10;
-let gameInterval;
+let gameStarted = false;
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Start Button Fix
     const startBtn = document.getElementById('start-quiz');
     if (startBtn) {
-        startBtn.onclick = () => {
+        startBtn.addEventListener('click', () => {
             showSection('quiz');
             loadQuestion();
-        };
+        });
     }
 
-    // Bubble Klick Logik
+    // Bubble Game
     const bubble = document.getElementById('bubble');
     if (bubble) {
         bubble.addEventListener('click', () => {
@@ -27,13 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function loadQuestion() {
     const q = questions[currentIdx];
-    const questionText = document.getElementById('question-text');
-    const btnContainer = document.getElementById('answer-buttons');
-    const progress = document.getElementById('progress');
+    document.getElementById('question-text').innerText = q.q;
+    const container = document.getElementById('answer-buttons');
+    container.innerHTML = '';
 
-    questionText.innerText = q.q;
-    btnContainer.innerHTML = '';
-    progress.style.width = ((currentIdx / questions.length) * 100) + "%";
+    document.getElementById('progress').style.width = ((currentIdx / questions.length) * 100) + "%";
 
     q.a.forEach(choice => {
         const b = document.createElement('button');
@@ -42,21 +47,22 @@ function loadQuestion() {
         b.onclick = () => {
             currentIdx++;
             if(currentIdx < questions.length) loadQuestion();
-            else startGame(); // Nach den Fragen startet das Spiel
+            else startMiniGame();
         };
-        btnContainer.appendChild(b);
+        container.appendChild(b);
     });
 }
 
-function startGame() {
+function startMiniGame() {
     showSection('game');
     moveBubble();
+    const timerElement = document.getElementById('timer');
 
-    gameInterval = setInterval(() => {
+    const interval = setInterval(() => {
         timeLeft--;
-        document.getElementById('timer').innerText = `Zeit: ${timeLeft}s`;
+        timerElement.innerText = timeLeft + "s";
         if (timeLeft <= 0) {
-            clearInterval(gameInterval);
+            clearInterval(interval);
             finish();
         }
     }, 1000);
@@ -64,23 +70,32 @@ function startGame() {
 
 function moveBubble() {
     const bubble = document.getElementById('bubble');
-    // Berechnet zufällige Position innerhalb der Game-Area
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight / 2 - 100);
+    const area = document.querySelector('.game-area');
+    const maxX = area.clientWidth - 70;
+    const maxY = area.clientHeight - 70;
 
-    bubble.style.left = x + "px";
-    bubble.style.top = y + "px";
+    bubble.style.left = Math.random() * maxX + "px";
+    bubble.style.top = Math.random() * maxY + "px";
 }
 
 function finish() {
     showSection('result');
-    // Swag basiert nun auf Klicks (z.B. 50% Basis + 5% pro Klick, max 100)
-    let swagResult = 50 + (clicks * 5);
-    if (swagResult > 100) swagResult = 100;
-    if (clicks === 0) swagResult = Math.floor(Math.random() * 20); // Strafe für 0 Klicks ;)
-
-    document.getElementById('swag-value').innerText = swagResult + "%";
-    document.getElementById('swag-comment').innerText = `Du hast ${clicks} Klicks geschafft!`;
+    let swag = 40 + (clicks * 6);
+    if (swag > 100) swag = 100;
+    document.getElementById('swag-value').innerText = swag + "%";
+    document.getElementById('swag-comment').innerText = `${clicks} Klicks! Stabil.`;
 }
 
-// ... (pay und showSection Funktionen bleiben gleich)
+function pay(amount) {
+    window.location.href = `https://www.paypal.me/PaulaGraichen/${amount}EUR`;
+}
+
+function showSection(id) {
+    document.querySelectorAll('section').forEach(s => {
+        s.classList.add('hidden');
+        s.classList.remove('active');
+    });
+    const target = document.getElementById(id);
+    target.classList.remove('hidden');
+    target.classList.add('active');
+}
