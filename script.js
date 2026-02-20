@@ -1,9 +1,9 @@
 const questions = [
-    { q: "Was ist Paulas Lieblingsessen?", a: ["Pizza", "Sushi", "Pasta", "Burger"] },
+    { q: "Was ist Paulas Lieblingsessen?", a: ["Pizza", "Sushi", "Pasta", "Salat"] },
     { q: "Lieblingsjahreszeit?", a: ["Sommer", "Winter", "Herbst", "Frühling"] },
     { q: "Signature-Farbe?", a: ["Pink", "Schwarz", "Blau", "Grün"] },
-    { q: "Sonntags-Vibe?", a: ["Netflix", "Sport", "Coding", "Party"] },
-    { q: "Dein Swag-Level?", a: ["Hoch", "Sehr Hoch", "Maximum", "Keiner"] }
+    { q: "Sonntags-Vibe?", a: ["Ausschlafen", "Sport", "Coding", "Party"] },
+    { q: "Dein Swag-Level?", a: ["Mittel", "Sehr Hoch", "Maximum", "Null"] }
 ];
 
 let currentIdx = 0;
