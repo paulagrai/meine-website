@@ -23,39 +23,39 @@ section {
 .hidden { opacity: 0; transform: scale(0.9); pointer-events: none; }
 .active { opacity: 1; transform: scale(1); }
 
-#welcome { background: var(--primary); }
+#welcome, #game-start { background: var(--primary); }
 #quiz, #game { background: #111; }
 #result { background: #000; border-top: 5px solid var(--primary); }
 
-/* Bubbly Buttons */
-.btn-main, .answer-btn {
+.btn-main, .answer-btn, .btn-insta {
     width: 100%; max-width: 300px;
     padding: 20px; border-radius: 50px;
-    border: none; font-size: 1.2rem; font-weight: 900;
+    border: none; font-size: 1.1rem; font-weight: 900;
     cursor: pointer; text-transform: uppercase;
     box-shadow: 0 6px 0 #cc0062; transition: 0.1s;
+    text-decoration: none; display: inline-block;
 }
 
 .btn-main { background: white; color: var(--primary); box-shadow: 0 6px 0 #ddd; }
 .btn-main:active { transform: translateY(3px); box-shadow: 0 3px 0 #ddd; }
 
+.btn-insta { background: #e1306c; color: white; margin-bottom: 15px; font-size: 0.9rem; }
+
 .answer-btn { background: var(--primary); color: white; margin-bottom: 10px; }
 .answer-btn:active { transform: translateY(3px); box-shadow: 0 3px 0 #a3004d; }
 
-/* Game Elements */
-.game-area { width: 100%; height: 300px; position: relative; margin-top: 20px; }
+.game-area { width: 100%; height: 350px; position: relative; }
 #bubble {
-    position: absolute; width: 70px; height: 70px;
+    position: absolute; width: 80px; height: 80px;
     background: var(--primary); border: none; border-radius: 50%;
     color: white; font-weight: bold; cursor: pointer;
-    box-shadow: 0 0 15px var(--primary);
+    box-shadow: 0 0 20px var(--primary);
 }
 
-#timer { font-size: 2rem; color: var(--primary); }
+#swag-value { font-size: 5.5rem; color: var(--primary); margin: 0; }
+.insta-callout { color: var(--primary); margin: 20px 0 10px 0; font-size: 0.8rem; }
 
-/* Result Elements */
-#swag-value { font-size: 5rem; color: var(--primary); }
 .pay-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 15px; }
-.btn-pay { background: #222; border: 2px solid var(--primary); color: white; padding: 12px 5px; border-radius: 10px; cursor: pointer; }
+.btn-pay { background: #222; border: 2px solid var(--primary); color: white; padding: 12px 2px; border-radius: 12px; cursor: pointer; font-size: 0.8rem; }
 .btn-pay.highlight { background: var(--primary); }
-.insta-link { color: var(--primary); text-decoration: none; font-size: 0.9rem; margin-top: 20px; display: inline-block; }
+.btn-retry { background: none; border: none; color: #555; margin-top: 20px; cursor: pointer; text-decoration: underline; }

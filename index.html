@@ -24,10 +24,16 @@
     </div>
 </section>
 
+<section id="game-start" class="hidden">
+    <div class="content-wrapper">
+        <h2>SAMMLE SWAG!</h2>
+        <p>Klicke im nächsten Screen so oft wie möglich auf die Bubble.</p>
+        <button id="go-to-game" class="btn-main">SPIEL STARTEN</button>
+    </div>
+</section>
+
 <section id="game" class="hidden">
     <div class="game-container">
-        <h2>SWAG-BOOST!</h2>
-        <p>Klicke die Bubble so oft du kannst!</p>
         <div id="timer">10s</div>
         <div id="score">Klicks: 0</div>
         <div class="game-area">
@@ -42,7 +48,9 @@
         <div id="swag-value">0%</div>
         <p id="swag-comment"></p>
 
-        <p class="improve-text">Wähle deinen Boost:</p>
+        <p class="insta-callout">Für Ultimate Swag: Folge mir hier!</p>
+        <a href="https://instagram.com/paulagraichen" target="_blank" class="btn-insta">@paulagraichen auf Insta</a>
+
         <div class="pay-grid">
             <button onclick="pay(1)" class="btn-pay">1€ <br><span>Small</span></button>
             <button onclick="pay(3)" class="btn-pay highlight">3€ <br><span>Medium</span></button>
@@ -50,8 +58,6 @@
         </div>
 
         <button onclick="location.reload()" class="btn-retry">Nochmal versuchen</button>
-        <br>
-        <a href="https://instagram.com/paulagraichen" target="_blank" class="insta-link">@paulagraichen</a>
     </div>
 </section>
 

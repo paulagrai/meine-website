@@ -9,27 +9,27 @@ const questions = [
 let currentIdx = 0;
 let clicks = 0;
 let timeLeft = 10;
-let gameStarted = false;
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Start Button Fix
-    const startBtn = document.getElementById('start-quiz');
-    if (startBtn) {
-        startBtn.addEventListener('click', () => {
-            showSection('quiz');
-            loadQuestion();
-        });
-    }
+    // Start Quiz
+    document.getElementById('start-quiz').addEventListener('click', () => {
+        showSection('quiz');
+        loadQuestion();
+    });
+
+    // Start Game Screen zu Game
+    document.getElementById('go-to-game').addEventListener('click', () => {
+        showSection('game');
+        startMiniGame();
+    });
 
     // Bubble Game
     const bubble = document.getElementById('bubble');
-    if (bubble) {
-        bubble.addEventListener('click', () => {
-            clicks++;
-            document.getElementById('score').innerText = `Klicks: ${clicks}`;
-            moveBubble();
-        });
-    }
+    bubble.addEventListener('click', () => {
+        clicks++;
+        document.getElementById('score').innerText = `Klicks: ${clicks}`;
+        moveBubble();
+    });
 });
 
 function loadQuestion() {
@@ -37,7 +37,6 @@ function loadQuestion() {
     document.getElementById('question-text').innerText = q.q;
     const container = document.getElementById('answer-buttons');
     container.innerHTML = '';
-
     document.getElementById('progress').style.width = ((currentIdx / questions.length) * 100) + "%";
 
     q.a.forEach(choice => {
@@ -47,20 +46,17 @@ function loadQuestion() {
         b.onclick = () => {
             currentIdx++;
             if(currentIdx < questions.length) loadQuestion();
-            else startMiniGame();
+            else showSection('game-start');
         };
         container.appendChild(b);
     });
 }
 
 function startMiniGame() {
-    showSection('game');
     moveBubble();
-    const timerElement = document.getElementById('timer');
-
     const interval = setInterval(() => {
         timeLeft--;
-        timerElement.innerText = timeLeft + "s";
+        document.getElementById('timer').innerText = timeLeft + "s";
         if (timeLeft <= 0) {
             clearInterval(interval);
             finish();
@@ -70,20 +66,20 @@ function startMiniGame() {
 
 function moveBubble() {
     const bubble = document.getElementById('bubble');
-    const area = document.querySelector('.game-area');
-    const maxX = area.clientWidth - 70;
-    const maxY = area.clientHeight - 70;
-
+    const maxX = window.innerWidth - 100;
+    const maxY = 300;
     bubble.style.left = Math.random() * maxX + "px";
     bubble.style.top = Math.random() * maxY + "px";
 }
 
 function finish() {
     showSection('result');
-    let swag = 40 + (clicks * 6);
-    if (swag > 100) swag = 100;
+    // Bessere Berechnung: 30% Basis + 3% pro Klick. Man braucht ca. 23 Klicks für 100%
+    let swag = 30 + (clicks * 3);
+    if (swag > 99) swag = 100;
+
     document.getElementById('swag-value').innerText = swag + "%";
-    document.getElementById('swag-comment').innerText = `${clicks} Klicks! Stabil.`;
+    document.getElementById('swag-comment').innerText = `Du hast ${clicks} Klicks geschafft!`;
 }
 
 function pay(amount) {
