@@ -3,29 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paulas Website</title>
+    <title>Paulas Swag Checker</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <section id="welcome" class="active">
-    <h1>Paulas Website</h1>
-    <button id="show-profile" class="btn">Zum Steckbrief</button>
+    <h1>Wie viel Swag hast du?</h1>
+    <button id="start-quiz" class="btn">Check meinen Swag!</button>
 </section>
 
-<section id="profile" class="hidden">
-    <div class="profile-card">
-        <h2>Paula G.</h2>
-        <p>Herzlich Willkommen auf meiner Seite! Hier entsteht gerade mein persönlicher Steckbrief.</p>
-        <p><strong>Über mich:</strong> Ich interessiere mich für spannende Projekte und vernetze mich gerne.</p>
+<section id="quiz" class="hidden">
+    <div class="quiz-container">
+        <h2 id="question-text">Frage 1</h2>
+        <div id="answer-buttons" class="answer-grid">
+        </div>
     </div>
+</section>
 
-    <div class="links-footer">
-        <a href="cv.pdf" target="_blank">CV</a>
-        <a href="https://linkedin.com/in/dein-name" target="_blank">LinkedIn</a>
+<section id="result" class="hidden">
+    <div class="result-card">
+        <h2>Dein Swag Level:</h2>
+        <div id="swag-value">0%</div>
+        <p id="swag-comment"></p>
+
+        <button id="improve-btn" class="btn improve">Improve your Swag Level (1€)</button>
+        <button onclick="location.reload()" class="back-link">Nochmal versuchen</button>
     </div>
-
-    <button id="go-back" class="back-link">← Zurück</button>
 </section>
 
 <script src="script.js"></script>
