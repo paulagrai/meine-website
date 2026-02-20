@@ -49,8 +49,8 @@ function finish() {
 }
 
 function pay(amount) {
-    const email = "paula.graichen@live.de";
-    window.location.href = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=${email}&amount=${amount}.00&currency_code=EUR&item_name=Swag+Boost+Level+${amount}`;
+    const url = `https://www.paypal.me/PaulaGraichen/${amount}EUR`;
+    window.location.href = url;
 }
 
 function showSection(id) {
