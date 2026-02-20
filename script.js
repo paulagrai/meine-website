@@ -1,8 +1,8 @@
 const questions = [
-    { q: "Was ist Paulas Lieblingsessen?", a: ["Pizza", "Sushi", "Pasta", "Salat"] },
-    { q: "Welche Jahreszeit findet Paula am besten?", a: ["Herbst", "Winter", "Sommer", "Frühling"] },
-    { q: "Paulas Lieblings Farbe?", a: ["Pink", "Schwarz", "Blau", "Grün"] },
-    { q: "Was macht Paula an einem freien Sonntag?", a: ["Ausschlafen", "Sport", "Coding", "Party"] },
+    { q: "Was ist Vickys Lieblingsessen?", a: ["Pizza", "Sushi", "Pasta", "Salat"] },
+    { q: "Welche Jahreszeit findet Vicky am besten?", a: ["Herbst", "Winter", "Sommer", "Frühling"] },
+    { q: "Vickys Lieblings Farbe?", a: ["Pink", "Schwarz", "Blau", "Grün"] },
+    { q: "Was macht Vicky an einem freien Sonntag?", a: ["Ausschlafen", "Sport", "Coding", "Party"] },
     { q: "Ehrliche Einschätzung: Wie viel Swag hast du?", a: ["Unendlich", "Viel", "Mittelmäßig", "Keinen"] }
 ];
 
