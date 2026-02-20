@@ -1,9 +1,9 @@
 const questions = [
-    { q: "Was ist Paulas Lieblingsessen?", a: ["Pizza", "Sushi", "Pasta", "Salat"] },
+    { q: "Was ist Paulas Lieblingsessen?", a: ["Pizza", "Sushi", "Pasta", "Burger"] },
     { q: "Lieblingsjahreszeit?", a: ["Sommer", "Winter", "Herbst", "Frühling"] },
     { q: "Signature-Farbe?", a: ["Pink", "Schwarz", "Blau", "Grün"] },
     { q: "Sonntags-Vibe?", a: ["Ausschlafen", "Sport", "Coding", "Party"] },
-    { q: "Dein Swag-Level?", a: ["Mittel", "Sehr Hoch", "Maximum", "Null"] }
+    { q: "Dein Swag-Level?", a: ["Mittel", "Sehr Hoch", "Maximum", "Keiner"] }
 ];
 
 let currentIdx = 0;
@@ -11,19 +11,16 @@ let clicks = 0;
 let timeLeft = 10;
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Start Quiz
     document.getElementById('start-quiz').addEventListener('click', () => {
         showSection('quiz');
         loadQuestion();
     });
 
-    // Start Game Screen zu Game
     document.getElementById('go-to-game').addEventListener('click', () => {
         showSection('game');
         startMiniGame();
     });
 
-    // Bubble Game
     const bubble = document.getElementById('bubble');
     bubble.addEventListener('click', () => {
         clicks++;
@@ -43,10 +40,22 @@ function loadQuestion() {
         const b = document.createElement('button');
         b.innerText = choice;
         b.classList.add('answer-btn');
+
         b.onclick = () => {
-            currentIdx++;
-            if(currentIdx < questions.length) loadQuestion();
-            else showSection('game-start');
+            // WINTER TRAP CHECK
+            if (choice === "Winter") {
+                const allButtons = document.querySelectorAll('.answer-btn');
+                allButtons.forEach(btn => btn.classList.add('spinning'));
+
+                setTimeout(() => {
+                    allButtons.forEach(btn => btn.classList.remove('spinning'));
+                    alert("Winter ist zu kalt! Such dir was anderes aus. ✨");
+                }, 5000);
+            } else {
+                currentIdx++;
+                if(currentIdx < questions.length) loadQuestion();
+                else showSection('game-start');
+            }
         };
         container.appendChild(b);
     });
@@ -67,25 +76,16 @@ function startMiniGame() {
 function moveBubble() {
     const bubble = document.getElementById('bubble');
     const area = document.querySelector('.game-area');
-
-    // Wir nehmen die Maße der Area, damit die Bubble nicht rausfliegt
     const maxX = area.clientWidth - 90;
     const maxY = area.clientHeight - 90;
-
-    // Sicherheitscheck für negative Werte
-    const posX = Math.max(0, Math.random() * maxX);
-    const posY = Math.max(0, Math.random() * maxY);
-
-    bubble.style.left = posX + "px";
-    bubble.style.top = posY + "px";
+    bubble.style.left = Math.max(0, Math.random() * maxX) + "px";
+    bubble.style.top = Math.max(0, Math.random() * maxY) + "px";
 }
 
 function finish() {
     showSection('result');
-    // Berechnung: Wer mehr als 20 Klicks schafft, knackt die 90%
     let swag = 25 + (clicks * 3.5);
     if (swag > 99) swag = 100;
-
     document.getElementById('swag-value').innerText = Math.floor(swag) + "%";
     document.getElementById('swag-comment').innerText = `Starke Leistung mit ${clicks} Klicks!`;
 }
