@@ -73,3 +73,34 @@ h1 { font-size: 2.8rem; line-height: 1; margin-bottom: 20px; }
 .btn-retry { background: none; border: none; color: #555; margin-top: 25px; cursor: pointer; text-decoration: underline; }
 .progress-bar { width: 100%; height: 8px; background: #222; border-radius: 4px; margin-bottom: 20px; }
 #progress { height: 100%; background: var(--primary); width: 0%; transition: 0.3s; }
+
+#game { background: #000; overflow: hidden; }
+
+.game-area {
+    width: 100vw;
+    height: 50vh;
+    position: relative;
+    margin-top: 20px;
+}
+
+#bubble {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: var(--primary);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 20px var(--primary);
+    transition: transform 0.1s;
+    /* Damit man nicht markiert beim schnellen Klicken */
+    user-select: none;
+}
+
+#timer, #score {
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin: 5px;
+}

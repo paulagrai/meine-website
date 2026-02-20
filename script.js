@@ -1,12 +1,9 @@
-const questions = [
-    { q: "Was ist Paulas Lieblingsessen?", a: ["Pizza", "Sushi", "Pasta", "Salat"] },
-    { q: "Welche Jahreszeit findet Paula am besten?", a: ["Herbst", "Winter", "Sommer", "Frühling"] },
-    { q: "Paulas Lieblings Farbe?", a: ["Pink", "Schwarz", "Blau", "Grün"] },
-    { q: "Was macht Paula an einem freien Sonntag?", a: ["Ausschlafen", "Sport", "Coding", "Party"] },
-    { q: "Ehrliche Einschätzung: Wie viel Swag hast du?", a: ["Unendlich", "Viel", "Mittelmäßig", "Keinen"] }
-];
+// ... (Fragen-Array bleibt gleich)
 
 let currentIdx = 0;
+let clicks = 0;
+let timeLeft = 10;
+let gameInterval;
 
 document.addEventListener('DOMContentLoaded', () => {
     const startBtn = document.getElementById('start-quiz');
@@ -15,6 +12,16 @@ document.addEventListener('DOMContentLoaded', () => {
             showSection('quiz');
             loadQuestion();
         };
+    }
+
+    // Bubble Klick Logik
+    const bubble = document.getElementById('bubble');
+    if (bubble) {
+        bubble.addEventListener('click', () => {
+            clicks++;
+            document.getElementById('score').innerText = `Klicks: ${clicks}`;
+            moveBubble();
+        });
     }
 });
 
@@ -35,29 +42,45 @@ function loadQuestion() {
         b.onclick = () => {
             currentIdx++;
             if(currentIdx < questions.length) loadQuestion();
-            else finish();
+            else startGame(); // Nach den Fragen startet das Spiel
         };
         btnContainer.appendChild(b);
     });
 }
 
+function startGame() {
+    showSection('game');
+    moveBubble();
+
+    gameInterval = setInterval(() => {
+        timeLeft--;
+        document.getElementById('timer').innerText = `Zeit: ${timeLeft}s`;
+        if (timeLeft <= 0) {
+            clearInterval(gameInterval);
+            finish();
+        }
+    }, 1000);
+}
+
+function moveBubble() {
+    const bubble = document.getElementById('bubble');
+    // Berechnet zufällige Position innerhalb der Game-Area
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight / 2 - 100);
+
+    bubble.style.left = x + "px";
+    bubble.style.top = y + "px";
+}
+
 function finish() {
     showSection('result');
-    const val = Math.floor(Math.random() * 31) + 65; // Zufall zwischen 65-95%
-    document.getElementById('swag-value').innerText = val + "%";
-    document.getElementById('swag-comment').innerText = "Dein Swag ist okay, aber nicht perfekt.";
+    // Swag basiert nun auf Klicks (z.B. 50% Basis + 5% pro Klick, max 100)
+    let swagResult = 50 + (clicks * 5);
+    if (swagResult > 100) swagResult = 100;
+    if (clicks === 0) swagResult = Math.floor(Math.random() * 20); // Strafe für 0 Klicks ;)
+
+    document.getElementById('swag-value').innerText = swagResult + "%";
+    document.getElementById('swag-comment').innerText = `Du hast ${clicks} Klicks geschafft!`;
 }
 
-function pay(amount) {
-    const url = `https://www.paypal.me/PaulaGraichen/${amount}EUR`;
-    window.location.href = url;
-}
-
-function showSection(id) {
-    document.querySelectorAll('section').forEach(s => {
-        s.classList.add('hidden');
-        s.classList.remove('active');
-    });
-    document.getElementById(id).classList.remove('hidden');
-    document.getElementById(id).classList.add('active');
-}
+// ... (pay und showSection Funktionen bleiben gleich)
