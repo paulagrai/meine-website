@@ -2,22 +2,25 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Paulas Swag Checker</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <section id="welcome" class="active">
-    <h1>Wie viel Swag hast du?</h1>
-    <button id="start-quiz" class="btn">Check meinen Swag!</button>
+    <div class="content-wrapper">
+        <h1>Wie viel <span class="glitch">Swag</span> hast du?</h1>
+        <p>Finde es jetzt heraus.</p>
+        <button id="start-quiz" class="btn-main">CHECK STARTEN</button>
+    </div>
 </section>
 
 <section id="quiz" class="hidden">
-    <div class="quiz-container">
-        <h2 id="question-text">Frage 1</h2>
-        <div id="answer-buttons" class="answer-grid">
-        </div>
+    <div class="quiz-card">
+        <div class="progress-bar"><div id="progress"></div></div>
+        <h2 id="question-text">Lade Frage...</h2>
+        <div id="answer-buttons" class="answer-grid"></div>
     </div>
 </section>
 
