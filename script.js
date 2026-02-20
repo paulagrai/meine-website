@@ -66,20 +66,28 @@ function startMiniGame() {
 
 function moveBubble() {
     const bubble = document.getElementById('bubble');
-    const maxX = window.innerWidth - 100;
-    const maxY = 300;
-    bubble.style.left = Math.random() * maxX + "px";
-    bubble.style.top = Math.random() * maxY + "px";
+    const area = document.querySelector('.game-area');
+
+    // Wir nehmen die Maße der Area, damit die Bubble nicht rausfliegt
+    const maxX = area.clientWidth - 90;
+    const maxY = area.clientHeight - 90;
+
+    // Sicherheitscheck für negative Werte
+    const posX = Math.max(0, Math.random() * maxX);
+    const posY = Math.max(0, Math.random() * maxY);
+
+    bubble.style.left = posX + "px";
+    bubble.style.top = posY + "px";
 }
 
 function finish() {
     showSection('result');
-    // Bessere Berechnung: 30% Basis + 3% pro Klick. Man braucht ca. 23 Klicks für 100%
-    let swag = 30 + (clicks * 3);
+    // Berechnung: Wer mehr als 20 Klicks schafft, knackt die 90%
+    let swag = 25 + (clicks * 3.5);
     if (swag > 99) swag = 100;
 
-    document.getElementById('swag-value').innerText = swag + "%";
-    document.getElementById('swag-comment').innerText = `Du hast ${clicks} Klicks geschafft!`;
+    document.getElementById('swag-value').innerText = Math.floor(swag) + "%";
+    document.getElementById('swag-comment').innerText = `Starke Leistung mit ${clicks} Klicks!`;
 }
 
 function pay(amount) {
